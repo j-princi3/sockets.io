@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Room Chat</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5f7fa;
+      --accent-color: #50e3c2;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 8px;
+      --max-width: 600px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--secondary-color);
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      background-color: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    #lobby, #chat {
+      padding: 20px;
+    }
+    #lobby input,
+    #lobby button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+    }
+    #lobby button {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #lobby button:hover {
+      background-color: #42c1a8;
+    }
+    #lobby-msg {
+      margin-top: 12px;
+      color: #333;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    #messages {
+      list-style: none;
+      padding: 0;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #eee;
+      border-radius: var(--border-radius);
+      margin-bottom: 16px;
+    }
+    #messages li {
+      padding: 10px;
+      margin: 4px;
+      border-radius: var(--border-radius);
+      background-color: var(--secondary-color);
+      word-wrap: break-word;
+    }
+    .msg-self {
+      background-color: var(--accent-color);
+      color: #fff;
+      align-self: flex-end;
+    }
+    .msg-other {
+      background-color: #e0e0e0;
+      align-self: flex-start;
+    }
+    #chat h2 {
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+      color: #444;
+    }
+    #msg-form {
+      display: flex;
+      gap: 8px;
+    }
+    #msg-form input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+    }
+    #msg-form button {
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #msg-form button:hover {
+      background-color: #3a78c2;
+    }
+    /* Flex container for messages to allow alignment */
+    #messages { display: flex; flex-direction: column; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>Room Chat</header>
+    <div id="lobby">
+      <input id="username" placeholder="Your name" />
+      <button id="btn-create">Create Room</button>
+      <input id="code-input" placeholder="Enter room code" />
+      <button id="btn-join">Join Room</button>
+      <p id="lobby-msg"></p>
+    </div>
+
+    <div id="chat">
+      <h2 id="room-title"></h2>
+      <ul id="messages"></ul>
+      <form id="msg-form">
+        <input id="msg-input" autocomplete="off" placeholder="Type a message…" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
